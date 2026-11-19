@@ -2,57 +2,411 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bekseiyt Daniyarov | Portfolio</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bekseiyt Daniyarov | Portfolio</title>
 
-    <style>
-        body {
-            background-color: #101010;
-            color: #ffffff;
-            font-family: Arial, sans-serif;
-            margin: 0;
+<style>
+    :root {
+        --background: #0c0c0c;
+        --card: #161616;
+        --border: #292929;
+        --text: #f2f2f2;
+        --muted: #999999;
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    html {
+        scroll-behavior: smooth;
+    }
+
+    body {
+        margin: 0;
+        background: var(--background);
+        color: var(--text);
+        font-family: Arial, sans-serif;
+    }
+
+    .container {
+        max-width: 1100px;
+        margin: auto;
+        padding: 0 24px;
+    }
+
+    header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 28px 0;
+        border-bottom: 1px solid var(--border);
+    }
+
+    .logo {
+        font-size: 26px;
+        font-weight: bold;
+    }
+
+    nav {
+        display: flex;
+        gap: 24px;
+    }
+
+    a {
+        color: inherit;
+        text-decoration: none;
+    }
+
+    nav a {
+        color: var(--muted);
+        font-size: 14px;
+        transition: color 0.2s;
+    }
+
+    nav a:hover {
+        color: white;
+    }
+
+    .hero {
+        padding: 70px 0 50px;
+    }
+
+    .label {
+        font-size: 11px;
+        letter-spacing: 2px;
+        color: var(--muted);
+    }
+
+    h1 {
+        font-size: clamp(38px, 7vw, 85px);
+        letter-spacing: -2px;
+        line-height: 1.05;
+        margin: 24px 0;
+    }
+
+    h1 span {
+        color: #888888;
+    }
+
+    .subtitle {
+        font-size: clamp(18px, 3vw, 24px);
+        margin-bottom: 12px;
+    }
+
+    p {
+        color: var(--muted);
+        line-height: 1.7;
+    }
+
+    .grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px;
+    }
+
+    .card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 28px;
+        transition: border-color 0.25s,
+                    transform 0.25s,
+                    background 0.25s;
+    }
+
+    a.card:hover {
+        transform: translateY(-3px);
+        border-color: #666666;
+        background: #1c1c1c;
+    }
+
+    a:focus-visible {
+        outline: 2px solid white;
+        outline-offset: 4px;
+    }
+
+    .stat {
+        font-size: 42px;
+        font-weight: bold;
+        margin: 0;
+    }
+
+    .card p {
+        margin: 8px 0 0;
+        font-size: 14px;
+    }
+
+    .wide {
+        grid-column: span 2;
+    }
+
+    .card-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .arrow {
+        font-size: 24px;
+        color: var(--muted);
+    }
+
+    .chart {
+        display: flex;
+        align-items: flex-end;
+        gap: 10px;
+        height: 130px;
+        margin: 30px 0 20px;
+    }
+
+    .bar {
+        flex: 1;
+        background: #454545;
+        border-radius: 3px 3px 0 0;
+    }
+
+    .bar:last-child {
+        background: #dddddd;
+    }
+
+    .section {
+        padding: 48px 0;
+        border-bottom: 1px solid var(--border);
+        scroll-margin-top: 20px;
+    }
+
+    .section h2 {
+        font-size: 28px;
+        margin: 16px 0;
+    }
+
+    .tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 20px;
+    }
+
+    .tag {
+        border: 1px solid #383838;
+        border-radius: 6px;
+        padding: 10px 16px;
+        font-size: 14px;
+        color: #bbbbbb;
+    }
+
+    footer {
+        padding: 35px 0;
+        text-align: center;
+        color: var(--muted);
+        font-size: 12px;
+    }
+
+    @media (max-width: 600px) {
+        .container {
+            padding: 0 18px;
         }
 
-        main {
-            max-width: 1000px;
-            margin: auto;
-            padding: 100px 30px;
+        nav {
+            gap: 14px;
         }
 
-        h1 {
-            font-size: clamp(40px, 8vw, 80px);
-            letter-spacing: -2px;
-            margin: 20px 0;
+        .hero {
+            padding: 45px 0 35px;
         }
 
-        p {
-            color: #999999;
-            line-height: 1.6;
+        .card {
+            padding: 18px;
         }
 
-        hr {
-            border: 0;
-            border-top: 1px solid #333333;
-            margin: 40px 0;
+        .stat {
+            font-size: 32px;
         }
-    </style>
+
+        .chart {
+            height: 90px;
+            gap: 5px;
+        }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        html {
+            scroll-behavior: auto;
+        }
+
+        .card {
+            transition: none;
+        }
+    }
+</style>
 </head>
+
 <body>
+<div class="container">
+
+    <header>
+        <a class="logo" href="#home">BD.</a>
+
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#projects">Projects</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
+
     <main>
-        <p>PERSONAL PORTFOLIO / 2026</p>
 
-        <h1>BEKSEIYT<br>DANIYAROV.</h1>
+        <section class="hero" id="home">
 
-        <h2>Data Analytics &amp; Process Automation</h2>
+            <div class="label">
+                PERSONAL PORTFOLIO / 2026
+            </div>
 
-        <p>Анализ данных. Автоматизация процессов.
-        Разработка технических решений.</p>
+            <h1>
+                BEKSEIYT<br>
+                <span>DANIYAROV.</span>
+            </h1>
 
-        <hr>
+            <div class="subtitle">
+                Data Analytics &amp; Process Automation
+            </div>
 
-        <h2>Мои проекты</h2>
-        <p>Портфолио находится в разработке.</p>
+            <p>
+                Анализ данных. Автоматизация процессов.
+                Разработка технических решений.
+            </p>
+
+        </section>
+
+        <div class="grid">
+
+            <div class="card">
+                <div class="stat">4+</div>
+                <p>Лет опыта работы</p>
+            </div>
+
+            <div class="card">
+                <div class="stat">ALS</div>
+                <p>Профессиональный опыт</p>
+            </div>
+
+            <a class="card wide" href="#projects">
+
+                <div class="card-header">
+                    <span class="label">01 / PROJECTS</span>
+                    <span class="arrow">↗</span>
+                </div>
+
+                <h2>Selected projects</h2>
+
+                <div class="chart" aria-hidden="true">
+                    <div class="bar" style="height:30%"></div>
+                    <div class="bar" style="height:45%"></div>
+                    <div class="bar" style="height:38%"></div>
+                    <div class="bar" style="height:60%"></div>
+                    <div class="bar" style="height:52%"></div>
+                    <div class="bar" style="height:65%"></div>
+                    <div class="bar" style="height:59%"></div>
+                    <div class="bar" style="height:78%"></div>
+                    <div class="bar" style="height:68%"></div>
+                    <div class="bar" style="height:85%"></div>
+                    <div class="bar" style="height:76%"></div>
+                    <div class="bar" style="height:100%"></div>
+                </div>
+
+                <p>Dashboards / Automation / Analytics</p>
+
+            </a>
+
+            <a class="card" href="#experience">
+                <div class="card-header">
+                    <span class="label">02 / EXPERIENCE</span>
+                    <span class="arrow">↗</span>
+                </div>
+                <h3>Опыт работы</h3>
+                <p>Professional experience</p>
+            </a>
+
+            <a class="card" href="#technologies">
+                <div class="card-header">
+                    <span class="label">03 / TECHNOLOGIES</span>
+                    <span class="arrow">↗</span>
+                </div>
+                <h3>Инструменты</h3>
+                <p>Tools &amp; technologies</p>
+            </a>
+
+            <a class="card" href="#about">
+                <div class="card-header">
+                    <span class="label">04 / ABOUT</span>
+                    <span class="arrow">↗</span>
+                </div>
+                <h3>Обо мне</h3>
+                <p>Professional profile</p>
+            </a>
+
+            <a class="card" href="#contact">
+                <div class="card-header">
+                    <span class="label">05 / CONTACT</span>
+                    <span class="arrow">↗</span>
+                </div>
+                <h3>Контакты</h3>
+                <p>Get in touch</p>
+            </a>
+
+        </div>
+
+        <section class="section" id="projects">
+            <div class="label">01 / PROJECTS</div>
+            <h2>Мои проекты</h2>
+            <p>Демонстрационные проекты в разработке.</p>
+        </section>
+
+        <section class="section" id="experience">
+            <div class="label">02 / EXPERIENCE</div>
+            <h2>Опыт работы</h2>
+            <h3>ALS</h3>
+            <p>Специалист по вводу данных</p>
+            <p>2022 — настоящее время</p>
+        </section>
+
+        <section class="section" id="technologies">
+            <div class="label">03 / TECHNOLOGIES</div>
+            <h2>Инструменты и технологии</h2>
+
+            <div class="tags">
+                <span class="tag">Microsoft Excel</span>
+                <span class="tag">Power Query</span>
+                <span class="tag">VBA</span>
+                <span class="tag">M Language</span>
+            </div>
+        </section>
+
+        <section class="section" id="about">
+            <div class="label">04 / ABOUT</div>
+            <h2>Обо мне</h2>
+            <p>
+                Занимаюсь обработкой данных,
+                разработкой дашбордов и автоматизацией
+                операционных процессов.
+            </p>
+        </section>
+
+        <section class="section" id="contact">
+            <div class="label">05 / CONTACT</div>
+            <h2>Контакты</h2>
+            <p>Раздел в разработке.</p>
+        </section>
+
     </main>
+
+    <footer>
+        © 2026 Bekseiyt Daniyarov
+    </footer>
+
+</div>
 </body>
 </html>
